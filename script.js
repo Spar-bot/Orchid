@@ -1,7 +1,6 @@
-const correctCode = "EROM";
-const correctAnswer = "room";
+const correctCode = "IMDMF004";
 
-document.getElementById('submitCode').addEventListener('click', function () {
+document.getElementById('submitCode').addEventListener('click', function() {
     const userInput = document.getElementById('userInput').value;
     console.log(userInput)
 
@@ -12,41 +11,24 @@ function checkCode(userCode) {
     const code = document.getElementById('code');
     code.innerHTML = ''; // Clear previous feedback
 
-    if (userCode == correctCode) {
-        // Hide the passcode input and show the puzzle
-        document.getElementById('app').style.display = 'none';
-        document.getElementById('puzzle').style.display = 'block';
+    const span = document.createElement('span');
+    if (userCode == correctCode){
+        span.className = 'correct';
+        span.textContent = 'Congratulations ! Your team made it!';
 
-    } else {
-        const span = document.createElement('span');
-        span.className = 'wrong';
-        span.textContent = 'Please try again.';
-        code.appendChild(span);
-    }
-}
-
-document.getElementById('submitAnswer').addEventListener('click', function () {
-    const userAnswer = document.getElementById('answer').value;
-    checkAnswer(userAnswer.toLowerCase());
-});
-
-function checkAnswer(userAnswer) {
-    const finalMessage = document.getElementById('finalMessage');
-
-    finalMessage.innerHTML = ''; // Clear previous feedback
-    finalMessage.style.display = 'block';
-
-    if (userAnswer == correctAnswer) {
-        finalMessage.textContent = 'You got it! Now proceed to Station 2!';
         confetti({
-            particleCount: 100,
-            spread: 70,
+            particleCount: 500,
+            spread: 100,
             origin: { y: 0.6 }
         });
-    } else {
-        finalMessage.textContent = 'Incorrect answer. Please try again.';
     }
-}
+    else {
+        span.className = 'wrong';
+        span.textContent = 'Please try again.';
+    }
+
+    code.appendChild(span)
+
     // for (let i = 0; i < guess.length; i++) {
     //     const span = document.createElement('span');
     //     if (guess[i] === correctNumber[i]) {
@@ -59,7 +41,7 @@ function checkAnswer(userAnswer) {
     //     span.textContent = guess[i];
     //     feedback.appendChild(span);
     // }
-// }
+}
 
 // $(document).ready(function () {
 //     $('.toggle').click(function(){
